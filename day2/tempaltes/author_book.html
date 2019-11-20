@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>作者-图书管理</h1>
+<hr>
+
+<form method="post">
+    <label>作者：</label> <input id="author" name="author" type="text" value=""><br/>
+    <label>书名：</label> <input id="book" name="book" type="text" value=""><br/>
+    <input id="submit" name="submit" type="submit" value="添加"><br/>
+</form>
+<hr>
+{#获取闪现消息队列中的数据#}
+{% for msg in get_flashed_messages() %}
+    {{ msg }}
+    <br>
+{% endfor %}
+
+<hr>
+<ul>
+    {% for author in authors %}
+        <li>{{ author.name }} <a href="/delete_author/{{ author.id }}">删除</a>
+            <ul>
+                {% for book in author.books %}
+                    <li>{{ book.name }} <a href="/delete_book/{{ book.id }}">删除</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
